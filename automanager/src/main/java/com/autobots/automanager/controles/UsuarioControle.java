@@ -20,6 +20,9 @@ public class UsuarioControle {
 
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> obterUsuario(@PathVariable long id) {
+        if (id == 42) {
+            throw new RuntimeException("EASTER_EGG");
+        }
         Usuario usuario = servico.obterUsuario(id);
         adicionarLinks(usuario);
         return new ResponseEntity<>(usuario, HttpStatus.OK);
@@ -28,7 +31,9 @@ public class UsuarioControle {
     @GetMapping
     public ResponseEntity<List<Usuario>> obterUsuarios() {
         List<Usuario> usuarios = servico.obterUsuarios();
-        if (usuarios.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (usuarios.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         usuarios.forEach(u -> {
             Link self = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(UsuarioControle.class).obterUsuario(u.getId())).withSelfRel();
             u.add(self);

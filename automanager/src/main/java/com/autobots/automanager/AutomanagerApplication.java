@@ -1,12 +1,13 @@
+package com.autobots.automanager;
 
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.autobots.automanager.credenciais.*;
 import com.autobots.automanager.entitades.*;
 import com.autobots.automanager.enumeracoes.*;
-
 import com.autobots.automanager.repositorios.RepositorioEmpresa;
 
 @SpringBootApplication
@@ -21,9 +22,7 @@ public class AutomanagerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if (repositorioEmpresa.count() > 0) {
-            return;
-        }
+        if (repositorioEmpresa.count() > 0) return;
 
         Empresa empresa = new Empresa();
         empresa.setRazaoSocial("Megazoo Ltda");
@@ -44,7 +43,6 @@ public class AutomanagerApplication implements CommandLineRunner {
         telefoneEmpresa.setNumero("39121000");
         empresa.getTelefones().add(telefoneEmpresa);
 
-        // FUNCIONARIO - Jose Ricardo
         Usuario funcionario = new Usuario();
         funcionario.setNome("Jose Ricardo");
         funcionario.setNomeSocial("O Coelho Ousado");
@@ -84,7 +82,6 @@ public class AutomanagerApplication implements CommandLineRunner {
 
         empresa.getUsuarios().add(funcionario);
 
-        // Fornecedor - Cobasi
         Usuario fornecedor = new Usuario();
         fornecedor.setNome("Cobasi Comercio de Animais Ltda");
         fornecedor.setNomeSocial("Cobasi");
@@ -119,7 +116,6 @@ public class AutomanagerApplication implements CommandLineRunner {
 
         empresa.getUsuarios().add(fornecedor);
 
-        // Mercadoria - Feno
         Mercadoria feno = new Mercadoria();
         feno.setCadastro(new Date());
         feno.setFabricao(new Date());
@@ -132,7 +128,6 @@ public class AutomanagerApplication implements CommandLineRunner {
         empresa.getMercadorias().add(feno);
         fornecedor.getMercadorias().add(feno);
 
-        // Cliente - Daniele
         Usuario daniele = new Usuario();
         daniele.setNome("Daniele");
         daniele.setNomeSocial("A Coelha Carinhosa");
@@ -174,7 +169,6 @@ public class AutomanagerApplication implements CommandLineRunner {
 
         empresa.getUsuarios().add(daniele);
 
-        // Cliente - Hanna
         Usuario hanna = new Usuario();
         hanna.setNome("Hanna");
         hanna.setNomeSocial("A Coelha Cautelosa");
@@ -216,7 +210,6 @@ public class AutomanagerApplication implements CommandLineRunner {
 
         empresa.getUsuarios().add(hanna);
 
-        // Cliente - Frida
         Usuario frida = new Usuario();
         frida.setNome("Frida");
         frida.setNomeSocial("A Coelha Faminta");
@@ -258,7 +251,6 @@ public class AutomanagerApplication implements CommandLineRunner {
 
         empresa.getUsuarios().add(frida);
 
-        // Servicos
         Servico banhoTosa = new Servico();
         banhoTosa.setDescricao("Banho e tosa para coelhos");
         banhoTosa.setNome("Banho e Tosa");
@@ -272,7 +264,6 @@ public class AutomanagerApplication implements CommandLineRunner {
         empresa.getServicos().add(banhoTosa);
         empresa.getServicos().add(consulta);
 
-        // Venda para Daniele
         Venda venda = new Venda();
         venda.setCadastro(new Date());
         venda.setCliente(daniele);
